@@ -1,0 +1,65 @@
+:root{font-family:system-ui,sans-serif;color:#142744;background:#edf2f8;line-height:1.45}
+*{box-sizing:border-box}
+body{margin:0}
+header{background:#12253e;color:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px max(24px,calc((100vw - 1160px)/2))}
+.session-controls{display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:750;white-space:nowrap}
+.mark{display:grid;place-items:center;border-radius:9px;background:#49dbc0;color:#102b34;width:32px;height:32px}
+.local{color:#c8daea;white-space:nowrap}
+.contact{color:#c8daea;font-size:13px}
+main{max-width:1208px;margin:auto;padding:28px 24px 50px}
+.heading{margin-bottom:23px}
+h1{font-size:clamp(26px,4vw,40px);letter-spacing:-.04em;margin:0}
+h2{margin:0;font-size:18px}
+p{margin:6px 0}
+.heading p,.hint,#camState,.meta{color:#485d75}
+.layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:18px}
+.card{background:white;border:1px solid #d6e1ed;border-radius:16px;padding:18px;min-width:0}
+.auth-card{max-width:480px;margin:9vh auto 0}
+.auth-card form{display:grid;gap:10px;margin-top:20px}
+.auth-card label{font-weight:650}
+.auth-card small{color:#485d75}
+.auth-card input{width:100%;padding:10px;border:1px solid #afc2d6;border-radius:8px}
+.auth-card button{margin-top:8px}
+.auth-card #authStatus{color:#bc253b;font-weight:650;min-height:1.45em}
+.section-head,.controls{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.history-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.viewer{margin:14px 0;position:relative;overflow:hidden;border-radius:11px;background:#0e2036;display:grid;place-items:center;aspect-ratio:4/3;color:#bfd1e3}
+.viewer video,.viewer canvas{position:absolute;inset:0;width:100%;height:100%;transform:scaleX(-1)}
+.viewer canvas{pointer-events:none}
+.viewer video{object-fit:fill}
+button,input{font:inherit}
+button{cursor:pointer;padding:9px 12px;border:1px solid #cbd9e8;border-radius:8px;background:#f1f6fb;color:#142744;font-weight:650}
+button:hover{background:#dcebf7}
+button:disabled{opacity:.62;cursor:wait}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #118475;outline-offset:3px}
+.actions label{display:block;margin:13px 0 5px;font-weight:650}
+.actions input[type=text],#address{width:100%;padding:9px;border:1px solid #afc2d6;border-radius:8px}
+#liveMap{display:block;width:100%;height:220px;border:1px solid #d6e1ed;border-radius:8px;margin:10px 0}
+#liveMap[hidden]{display:none}
+.contact-form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:10px;align-items:end;margin:10px 0 16px}
+.contact-field{min-width:0}
+.contact-field label{display:block;font-size:13px;font-weight:650;margin:0 0 5px}
+.contact-form input{width:100%;min-width:0;padding:9px;border:1px solid #afc2d6;border-radius:8px}
+.contact-form input::placeholder{color:#73839a;opacity:.78;text-align:center}
+.contact-form button{grid-column:1/-1;min-height:40px}
+.contact-item{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #d6e1ed;padding:8px 0}
+.contact-item span{overflow-wrap:anywhere}
+.panic{width:100%;margin-top:12px;background:#bc253b;border-color:#bc253b;color:white;padding:14px}
+.panic:hover{background:#991f31}
+.panic-stop{width:100%;background:#243a55;border-color:#243a55;color:white}
+.panic-stop:hover{background:#162b43}
+.panic-stop[hidden]{display:none}
+.hint a{display:inline-block;margin:4px 8px 0 0}
+.level,.hint,#camState,.meta{font-size:14px}
+.level{display:flex;gap:8px;align-items:center}
+#status{font-weight:650;margin-top:12px}
+.history{margin-top:18px}
+article{border-top:1px solid #d6e1ed;padding:12px 0;overflow-wrap:anywhere}
+.photos{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.photos img{width:132px;max-width:100%;border-radius:6px;display:block}
+.delete-photos{margin-top:8px}
+.danger{border-color:#bc253b;color:#991f31}
+a{color:#145e90}
+@media(max-width:730px){.layout{grid-template-columns:1fr}main{padding:20px 12px}header{padding-inline:12px}}
+@media(max-width:430px){.contact-form{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:8px}}

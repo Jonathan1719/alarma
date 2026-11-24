@@ -1,0 +1,41 @@
+Project vigia {
+  database_type: 'SQLite'
+  Note: 'Esquema simplificado de la aplicación Alerta IA. DBdocs documenta el modelo; los datos reales siguen almacenándose localmente.'
+}
+
+Table users {
+  id integer [pk, not null, note: 'Debe ser siempre 1']
+  email varchar [unique, not null]
+  password_salt varchar [not null, note: 'Sal hexadecimal']
+  password_hash varchar [not null, note: 'Hash PBKDF2-SHA256 hexadecimal']
+  whatsapp varchar [not null, note: 'Número ecuatoriano local']
+}
+
+Table emergency_contacts {
+  id varchar [pk, not null]
+  name varchar [not null]
+  whatsapp varchar [not null, note: 'Número ecuatoriano local']
+}
+
+Table alerts {
+  id varchar [pk, not null, note: 'Identificador UUID']
+  created varchar [not null, note: 'Fecha y hora de creación']
+  kind varchar [not null, note: 'posible o amenaza']
+  address varchar [not null]
+  lat decimal [note: 'Latitud GPS']
+  lon decimal [note: 'Longitud GPS']
+  delivery varchar [not null, note: 'Resultado de correo y WhatsApp']
+  details text [not null, note: 'Detalle textual reconocido o detectado']
+}
+
+Table photos {
+  alert_id varchar [not null]
+  position integer [not null, note: 'Posición de 0 a 2']
+  jpeg blob [not null, note: 'Imagen JPEG']
+
+  indexes {
+    (alert_id, position) [pk]
+  }
+}
+
+Ref: photos.alert_id > alerts.id [delete: cascade]

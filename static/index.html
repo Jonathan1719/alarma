@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alerta IA | Monitor local</title>
+<link rel="stylesheet" href="/style.css">
+<script type="module" src="/app.js"></script>
+</head>
+<body>
+<header>
+<div class="brand"><span class="mark" aria-hidden="true">＋</span> Alerta IA</div>
+<div class="session-controls">
+<span class="local">Monitor local</span>
+<span class="contact" id="alertRecipient" hidden></span>
+<button id="logout" type="button" hidden>Cerrar sesión</button>
+</div>
+</header>
+<main id="authView" hidden>
+<section class="card auth-card">
+<h1 id="authTitle">Iniciar sesión</h1>
+<p id="authHelp">Accede para activar el monitoreo y las alertas.</p>
+<form id="authForm">
+<label for="authEmail">Correo electrónico</label>
+<input id="authEmail" type="email" autocomplete="username" maxlength="254" required>
+<label for="authPassword">Contraseña</label>
+<input id="authPassword" type="password" autocomplete="current-password" minlength="8" maxlength="128" required>
+<div id="whatsappField" hidden>
+<label for="authWhatsapp">Número de WhatsApp (formato internacional)</label>
+<input id="authWhatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="0983625739" pattern="(09[0-9]{8}|9[0-9]{8}|\+?5939[0-9]{8})" maxlength="16">
+<small>Escribe el número de Ecuador con el cero inicial, por ejemplo 0983625739.</small>
+</div>
+<button id="authSubmit" type="submit">Iniciar sesión</button>
+<p id="authStatus" role="alert" aria-live="polite"></p>
+<button id="authRetry" type="button" hidden>Reintentar conexión</button>
+</form>
+</section>
+</main>
+<main id="appView" hidden>
+<section class="heading"><h1>Monitoreo de seguridad</h1><p>La cámara, el micrófono y la detección de voz se inician automáticamente al iniciar sesión.</p></section>
+<div class="layout">
+<section class="card camera">
+<div class="section-head"><h2>Cámara en vivo</h2><span id="camState">Apagada</span></div>
+<div class="viewer"><video id="video" muted playsinline></video><canvas id="overlay"></canvas><p id="placeholder">Cámara apagada</p></div>
+<div class="controls">
+<button id="camera">Activar cámara</button><button id="mic">Activar micrófono</button>
+<label class="level" for="level">Nivel de audio <meter id="level" min="0" max="1" value="0"></meter></label>
+</div>
+<p class="hint" id="tracking" role="status">La cámara se activa automáticamente al iniciar sesión y requiere permiso del navegador.</p>
+<button id="speech" type="button">Activar detección de amenazas por voz</button>
+<p class="hint" id="speechStatus" role="status">Se inicia automáticamente. Chrome puede procesar audio mediante su servicio; solo se guarda el texto coincidente, no grabaciones. Puede equivocarse.</p>
+</section>
+<section class="card actions">
+<h2>Activar alerta</h2>
+<label for="address">Dirección del lugar</label>
+<input id="address" maxlength="250" value="Instituto Superior Tecnológico Yavirac, Quito">
+<p class="hint">Google Maps muestra tu ubicación al permitir el GPS; si no está disponible, muestra la dirección escrita.</p>
+<button id="location" type="button">Activar ubicación en vivo</button>
+<p class="hint" id="locationStatus" role="status">Ubicación en vivo apagada.</p>
+<button id="panic" class="panic" type="button">Activar alarma de pánico</button>
+<p class="hint" id="panicStatus" role="status">La alarma también se activa automáticamente si se confirma una posible agresión.</p>
+<button id="stopAlarm" class="panic-stop" type="button" hidden>Desactivar alarma</button>
+<button id="shareLocation" type="button">Enviar ubicación por WhatsApp</button>
+<p class="hint" id="shareStatus" role="status">Con Cloud API configurada, se envía directamente; sin ella, puedes abrir cada chat y enviar el mensaje preparado.</p>
+<h3>Contactos de emergencia</h3>
+<form id="contactForm" class="contact-form">
+<div class="contact-field">
+<label for="contactName">Nombre</label>
+<input id="contactName" type="text" maxlength="80" required>
+</div>
+<div class="contact-field">
+<label for="contactWhatsapp">Agregar número</label>
+<input id="contactWhatsapp" type="tel" inputmode="tel" maxlength="16" placeholder="+593 983625739" required>
+</div>
+<button type="submit">Agregar contacto</button>
+</form>
+<div id="contacts"><p>No hay contactos registrados.</p></div>
+<iframe id="liveMap" title="Mapa del Instituto Superior Tecnológico Yavirac en Google Maps" loading="lazy"
+  referrerpolicy="no-referrer"></iframe>
+<a id="openMap" href="https://www.google.com/maps/place/Instituto+Superior+Tecnol%C3%B3gico+Yavirac/@-0.2251764,-78.5164513,169m/data=!3m1!1e3!4m6!3m5!1s0x91d59a28366b3d81:0xc6029256689ed873!8m2!3d-0.2250844!4d-78.5166937!16s%2Fg%2F11bwg1jpn0?entry=ttu&amp;g_ep=EgoyMDI2MTExNS4wIKXMDSoASAFQAw%3D%3D"
+  target="_blank" rel="noopener noreferrer">Abrir este lugar en Google Maps</a>
+<p class="hint">Solo se guardan amenazas reconocidas por voz y posibles agresiones detectadas automáticamente. Los cuadros transparentes siguen las manos mientras la cámara está encendida.</p>
+<p id="status" role="status" aria-live="polite"></p>
+<button id="retry" hidden>Reintentar guardado</button>
+</section>
+</div>
+<section class="card history">
+<div class="section-head">
+<h2>Historial y evidencias</h2>
+<div class="history-controls">
+<button id="clearHistory" class="danger" type="button">Eliminar todo el historial</button>
+<button id="refresh" type="button">Actualizar</button>
+</div>
+</div>
+<div id="history"><p>Cargando historial…</p></div>
+</section>
+</main>
+</body>
+</html>
